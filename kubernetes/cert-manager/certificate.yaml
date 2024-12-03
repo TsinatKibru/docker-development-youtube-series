@@ -10,3 +10,20 @@ spec:
   issuerRef:
     name: letsencrypt-cluster-issuer
     kind: ClusterIssuer
+
+#for a jks format cert
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-java-cert
+  namespace: my-namespace
+spec:
+  secretName: java-keystore-secret
+  dnsNames:
+    - example.com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  jksKeystore:
+    create: true
+    profile: Modern2023
